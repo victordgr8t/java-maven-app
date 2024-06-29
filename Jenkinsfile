@@ -20,9 +20,9 @@ pipeline {
                 script {
                     echo "building the docker Image..."
                     withCredentials([usernamePassword(credentialsId: 'docker_hub_repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        sh 'docker build -t bnnyo/bnnyorepo:aman_new_linux_azure_vm7.14 .'
+                        sh 'docker build -t bnnyo/bnnyorepo:aman_new_linux_azure_vm1.14 .'
                         sh "echo $PASS | docker login -u $USER --password-stdin"
-                        sh 'docker push bnnyo/bnnyorepo:aman_new_linux_azure_vm7.14'
+                        sh 'docker push bnnyo/bnnyorepo:aman_new_linux_azure_vm1.14'
                     }
                 }
             }
