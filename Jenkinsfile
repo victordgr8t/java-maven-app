@@ -9,7 +9,7 @@ pipeline {
         stage('BuildJar') {
             steps {
                 script {
-                    echo "building the Jar...just test"
+                    echo "building the Jar...just test  - again"
                     sh 'mvn package'
                 }
             }
