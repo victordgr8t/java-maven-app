@@ -5,24 +5,62 @@ pipeline {
         maven 'maven_nana_3.9.6'
     }
     stages {
-
-        stage('BuildJar') {
-            steps {
+        stage('increment version') {
+            steps{
                 script {
-                    echo "building the Jar...just test"
-                    sh 'mvn package'
+                    echo 'increment app version'
+                    sh 'mvn build-helper:parse-version versions:set \
+                        -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
+                        versions:commit'
+                    def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
+                    def version = matcher[0][1]
+                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
                 }
             }
         }
-        
-        stage('BuildIMAGE') {
+        stage('Build Jar') {
+            steps {
+                script {
+                    echo "building the Jar..."
+                    sh 'mvn clean package'
+                }
+            }
+        }
+        stage('Build IMAGE') {
             steps {
                 script {
                     echo "building the docker Image..."
                     withCredentials([usernamePassword(credentialsId: 'docker_hub_repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        sh 'docker build -t bnnyo/bnnyorepo:aman_new_linux_azure_vm1.14 .'
+                        sh "docker build -t bnnyo/bnnyorepo:${IMAGE_NAME} ."
                         sh "echo $PASS | docker login -u $USER --password-stdin"
-                        sh 'docker push bnnyo/bnnyorepo:aman_new_linux_azure_vm1.14'
+                        sh "docker push bnnyo/bnnyorepo:${IMAGE_NAME}"
+                    }
+                }
+            }
+        }
+        stage('deploy') {
+            steps {
+                script {
+                    echo 'deploying docker image to EC2...'
+                    echo 'الحمد لله.'
+                }
+            }
+        }
+        stage('commit version update') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'gitlab-banno', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        sh 'git config --global user.email "jenkinsaman_alwa74@example.com"'
+                        sh 'git config --global user.name "jenkins_aman_w_bs"'
+
+                        sh 'git status'
+                        sh 'git branch'
+                        sh 'git config --list'
+
+                        sh "git remote set-url origin https://gitlab-banno:fuckGit%2355@gitlab.com/gitlab-banno/java-maven-app.git"
+                        sh 'git add .'
+                        sh 'git commit -m "test stopping commit loop"'
+                        sh 'git push origin HEAD:aman'
                     }
                 }
             }
