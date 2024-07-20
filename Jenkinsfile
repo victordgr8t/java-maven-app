@@ -60,7 +60,7 @@ pipeline {
                         sh "git remote set-url origin https://gitlab-banno:fuckGit%2355@gitlab.com/gitlab-banno/java-maven-app.git"
                         sh 'git add .'
                         sh 'git commit -m "test stopping commit loop"'
-                        sh 'git push origin HEAD:aman'
+                        sh 'git push origin HEAD:jenkins-jobs'
                     }
                 }
             }
