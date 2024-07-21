@@ -45,7 +45,7 @@ pipeline {
                     echo 'الحمد لله.'
                     def dockerCmd = 'docker run -d -p 8080:8080 bnnyo/bnnyorepo:1.1.9-15'
                     sshagent(['ec2-server-key']) {
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@3.66.169.205 ${dockerCmd}"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@3.79.188.62 ${dockerCmd}"
                     }
                 }
             }
