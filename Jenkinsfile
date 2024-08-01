@@ -7,13 +7,13 @@ pipeline {
                 echo 'BUILD'
             }
         }
-        stages {
+        
         stage('Test') {
             steps {
                 echo 'TEST'
             }
         }
-        stages {
+        
         stage('Deploy') {
             steps {
                 echo 'DEPLOY'
