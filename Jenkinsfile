@@ -5,7 +5,7 @@ pipeline {
         choice(name: 'VERSION', choices:['1.1.0','1.2.0','1.3.0'],description:'')
         booleanParam(name: 'executeTests', defaultValue: true, description:'')
     } 
-    stages {
+    stages{
         stage('Init') {
             steps {
                 script {
@@ -37,7 +37,8 @@ pipeline {
         
         stage('Deploy') {
             input {
-                message "Select the environment to deploy to", ok: "Done"
+                message "Select the environment to deploy to"
+                ok: "Done"
                 parameters{
                     choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description:'')
                 }
