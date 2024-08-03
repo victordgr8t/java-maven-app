@@ -20,10 +20,9 @@ pipeline {
                         sh 'docker build -t ravenravel/demo-app:jma-2.0 .'
                         sh 'echo $PASS | docker login -u $USER --password-stdin'
                         sh 'docker push ravenravel/demo-app:jma-2.0'
-                    }
                 }
             }
-        }
+         }
         stage("deploy") {
             steps {
                 script {
