@@ -19,7 +19,7 @@ pipeline {
                 }
             }
             steps {
-                echo 'TEST the Application'
+                echo 'TESTing the Application'
             }
         }
         
