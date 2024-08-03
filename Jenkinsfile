@@ -50,7 +50,7 @@ pipeline {
 
                     gv.deployApp()
                     echo "Deploing to ${ENV}"
-                    //echo "Deploing to ${TWO}"
+                    
                 }
             }
         }
