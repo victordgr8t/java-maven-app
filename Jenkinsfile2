@@ -1,1 +1,39 @@
-test
+
+pipeline {
+    agent any
+    stages {
+
+        stage("build") {
+            when {
+                expression {
+                    BRANCH_NANME = "master"
+                }
+            }
+            steps {
+                script {
+                    echo "Building the application ..."
+                }
+            }
+        }
+        stage('test') {
+            steps {
+                script {
+                    echo "Testing the application ..."
+                    echo "Executing pipeline for branch $BRANCH_NAME"
+                }
+            }
+        }
+        stage('deploy') {
+            when {
+                expression {
+                    BRANCH_NANME = "master"
+                }
+            }
+            steps {
+                script {
+                   echo 'Deploing the application'
+                }
+            }
+        }
+    }
+}
