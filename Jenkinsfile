@@ -33,11 +33,11 @@ pipeline {
         stage("deploy") {
             steps {
                 script {
-                    def dockerCmd='docker run -p 3080:8080 -d  victornta32/my-repo:jma-2.0'
+                    def dockerCmd = 'docker run -p 3080:8080 -d  victornta32/my-repo:jma-2.0'
 
                     sshagent(['azure_server_key']) {
                     
-                    sh "ssh -o StrichHostKeyChecking=no victornta@51.143.97.22 $(dockerCmd)"
+                        sh "ssh -o StrictHostKeyChecking=no victornta@51.143.97.22 $(dockerCmd)"
     
                     }
                 
