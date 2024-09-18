@@ -13,7 +13,7 @@ def buildImage() {
 } 
 
 def deployApp() {
-    def dockerCmd='docker run -p 3080:8080 -d nanajanashia/demo-app:1.0'
+    def dockerCmd='docker run -p 3080:8080 -d  victornta32/my-repo:jma-2.0'
 
     sshagent(['azure_server_key']) {
         
