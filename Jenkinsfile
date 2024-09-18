@@ -33,12 +33,17 @@ pipeline {
         stage("deploy") {
             steps {
                 script {
-        //            env.ENV = input message: "Select the environment to deploy to", ok: "Done", parameters: [choice(name: 'ONE', choices: ['dev', 'staging', 'prod'], description: '')]
-                    echo "No more and working yeah"
-                    gv.deployApp()
-                    echo "Done Deploying"
+                    def dockerCmd='docker run -p 3080:8080 -d  victornta32/my-repo:jma-2.0'
+
+                    sshagent(['azure_server_key']) {
+                    
+                    sh "ssh -o StrichHostKeyChecking=no victornta@51.143.97.22 $(dockerCmd)"
+    
+                    }
+                
                 }
             }
         }
     }
 }
+
