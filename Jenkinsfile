@@ -37,7 +37,7 @@ pipeline {
 
                     sshagent(['azure_server_key']) {
                     
-                        sh "ssh -o StrictHostKeyChecking=no victornta@51.143.97.22 $(dockerCmd)"
+                        sh "ssh -o StrictHostKeyChecking=no victornta@51.143.97.22 ${dockerCmd}"
     
                     }
                 
