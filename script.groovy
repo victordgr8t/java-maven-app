@@ -13,7 +13,13 @@ def buildImage() {
 } 
 
 def deployApp() {
-    echo 'deploying the application...'
+    def dockerCmd='docker run -p 3080:8080 -d nanajanashia/demo-app:1.0'
+
+    sshagent(['azure_server_key']) {
+        
+        sh "ssh -o StrichHostKeyChecking=no victornta@51.143.97.22 $(dockerCmd)"
+    
+    }
 } 
 
 return this
