@@ -9,5 +9,4 @@ services:
     port:
       - 5432:5432
     enviroment:
-      - POSTGRES_PASSWORD=1202
-      
+      - POSTGRES_PASSWORD:1202
