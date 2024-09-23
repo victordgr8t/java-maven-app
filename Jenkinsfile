@@ -33,11 +33,12 @@ pipeline {
         stage("deploy") {
             steps {
                 script {
-                    def dockerCmd = 'docker run -p 3080:8080 -d  victornta32/my-repo:jma-2.0'
+                    echo "deploying docker image to EC2..."
+                    def dockerComposeCmd = "docker-compose -f docker-compose.yaml up"
 
                     sshagent(['azure_server_key']) {
-                    
-                        sh "ssh -o StrictHostKeyChecking=no victornta@51.143.97.22 ${dockerCmd}"
+                        sh "scp docker-compose.yaml victornta@51.143.97.22:/home/victornta"
+                        sh "ssh -o StrictHostKeyChecking=no victornta@51.143.97.22 ${dockerComposeCmd}"
     
                     }
                 

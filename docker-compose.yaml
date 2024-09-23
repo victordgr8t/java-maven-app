@@ -1,0 +1,13 @@
+services:
+  java-maven-app:
+    image: victornta32/my-repo:jma-2.0
+    ports:
+      - 8080:8080
+  
+  postgres:
+    image: postgres
+    port:
+      - 5432:5432
+    enviroment:
+      - POSTGRES_PASSWORD=1202
+      
