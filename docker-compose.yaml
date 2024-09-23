@@ -6,7 +6,7 @@ services:
   
   postgres:
     image: postgres
-    port:
+    ports:
       - 5432:5432
     environment:
       - POSTGRES_PASSWORD:1202
