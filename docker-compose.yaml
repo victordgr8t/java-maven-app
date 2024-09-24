@@ -1,13 +1,13 @@
-version: '3.8'
+name: my_first_java_app
+
 services:
   java-maven-app:
     image: victornta32/my-repo:jma-2.0
     ports:
-      - 8080:8080
+      - "8080:8080"
   
-  postgres:
-    image: postgres
-    ports:
-      - 5432:5432
+  db:
+    image: postgres:13
     environment:
-      - POSTGRES_PASSWORD:1202
+      POSTGRES_USER: example
+      POSTGRES_DB: exampledb
