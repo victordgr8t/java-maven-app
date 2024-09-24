@@ -2,7 +2,7 @@ services:
   web:
     image: victornta32/my-repo:jma-2.0
     ports:
-      - "8080:8080"
+      - "8080:9000"
 
   db:
     image: postgres:13
