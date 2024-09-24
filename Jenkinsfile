@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     echo "deploying docker image to EC2..."
-                    def dockerComposeCmd = "docker compose -f docker-compose.yaml up"
+                    def dockerComposeCmd = "docker compose -f docker-compose.yaml up --detach"
 
                     sshagent(['azure_server_key']) {
                         sh "scp docker-compose.yaml victornta@51.143.97.22:/home/victornta"
