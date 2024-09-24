@@ -1,9 +1,9 @@
 services:
-  java-maven-app:
-    image: victornta32/my-repo:jma-2.0
+  web:
+    image: nginx:latest
     ports:
-      - "8080:8080"
-  
+      - "8080:80"
+
   db:
     image: postgres:13
     environment:
