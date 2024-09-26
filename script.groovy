@@ -3,12 +3,12 @@ def buildJar() {
     sh 'mvn package'
 } 
 
-def buildImage() {
+def buildImage(def IMAGE_NAME) {
     echo "building the docker image..."
     withCredentials([usernamePassword(credentialsId: 'docker-jenkins', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-        sh 'docker build -t victornta32/my-repo:jma-2.0 .'
+        sh "docker build -t $IMAGE_NAME"
         sh "echo $PASS | docker login -u $USER --password-stdin"
-        sh 'docker push victornta32/my-repo:jma-2.0'
+        sh "docker push $IMAGE_NAME"
     }
 } 
 

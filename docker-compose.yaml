@@ -1,6 +1,6 @@
 services:
   web:
-    image: victornta32/my-repo:jma-2.0
+    image: ${IMAGE} 
     ports:
       - "9000:9000"
 

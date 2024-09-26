@@ -7,6 +7,9 @@ pipeline {
     tools{
         maven 'maven-3.6'
     }
+    environment{
+        IMAGE_NAME='victornta32/my-repo:jma-2.0'
+    }
     stages {
         stage("init") {
             steps {
@@ -26,7 +29,7 @@ pipeline {
 
             steps {
                 script {
-                    gv.buildImage()
+                    gv.buildImage(env.IMAGE_NAME)
                 }
             }
         }
@@ -34,11 +37,12 @@ pipeline {
             steps {
                 script {
                     echo "deploying docker image to EC2..."
-                    def dockerComposeCmd = "docker compose -f docker-compose.yaml up --detach"
+                    def shellCmd= "bash ./servercmdscript.sh ${IMAGE_NAME}"
 
                     sshagent(['azure_server_key']) {
+                        sh "scp servercmdscript.sh victornta@51.143.97.22:/home/victornta"
                         sh "scp docker-compose.yaml victornta@51.143.97.22:/home/victornta"
-                        sh "ssh -o StrictHostKeyChecking=no victornta@51.143.97.22 ${dockerComposeCmd}"
+                        sh "ssh -o StrictHostKeyChecking=no victornta@51.143.97.22 ${shellCmd}"
     
                     }
                 
