@@ -46,9 +46,9 @@ pipeline {
                     def shellCmd= "bash ./servercmdscript.sh ${IMAGE_NAME}"
                     def ec2Instance = "victornta@51.143.97.22"
                     sshagent(['azure_server_key']) {
-                        sh "scp servercmdscript.sh ${ec2_instance}:/home/victornta"
-                        sh "scp docker-compose.yaml ${ec2_instance}:/home/victornta"
-                        sh "ssh -o StrictHostKeyChecking=no ${ec2_instance} ${shellCmd}"
+                        sh "scp servercmdscript.sh ${ec2_Instance}:/home/victornta"
+                        sh "scp docker-compose.yaml ${ec2_Instance}:/home/victornta"
+                        sh "ssh -o StrictHostKeyChecking=no ${ec2_Instance} ${shellCmd}"
     
                     }
                 
