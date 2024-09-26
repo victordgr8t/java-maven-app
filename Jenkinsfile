@@ -48,6 +48,7 @@ pipeline {
                 script {
                     buildImage (env.IMAGE_NAME)
                     dockerLogin()
+                    echo "${IMAGE_NAME}"
                     dockerPush(env.IMAGE_NAME)
                 }
             }
