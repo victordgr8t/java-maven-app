@@ -1,6 +1,11 @@
 #!/usr/bin/env groovy
-
-def gv
+library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
+    [$class:'GitSCMSource',
+      remote: 'https://gitlab.com/victornta32/jenkinssharedlibrary.git',
+      credentialsId: 'jenkinssharedlibrary'
+    
+    ]
+)
 
 pipeline {
     agent any
@@ -25,11 +30,12 @@ pipeline {
                 }
             }
         }
-        stage("build image") {
-
+        stage("build and push image") {
             steps {
                 script {
-                    gv.buildImage(env.IMAGE_NAME)
+                    buildImage (env.IMAGE_NAME)
+                    dockerLogin()
+                    dockerPush(env.IMAGE_NAME)
                 }
             }
         }
