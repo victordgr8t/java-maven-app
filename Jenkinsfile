@@ -1,28 +1,33 @@
-#!/usr/bin/env groovy
+#!/usr/bin.env groovy
 
-pipeline {
+pipeline {   
     agent any
     stages {
-        stage('test') {
+        stage("test") {
             steps {
                 script {
                     echo "Testing the application..."
+
                 }
             }
         }
-        stage('build') {
+        stage("build") {
             steps {
                 script {
                     echo "Building the application..."
                 }
             }
         }
-        stage('deploy') {
+
+        stage("deploy") {
             steps {
                 script {
-                    echo "Deploying the application..."
+                    def dockerCmd = 'docker run -p 3080:3080 -d rlakshya/jenkins-repo:1.0'
+                    sshagent(['ec2-server-key']) {
+                       sh "ssh -o StrictHostKeyChecking=no ec2-user@13.201.74.74 ${dockerCmd}"      
+                    }
                 }
             }
-        }
+        }               
     }
-}
+} 
