@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     echo "building image"
-                    buildImage()
+                    buildImage 'isidroj/demo-app:jma-3.0'
                 }
             }
         }
