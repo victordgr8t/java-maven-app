@@ -1,7 +1,13 @@
+#!/user/bin/env groovy
+@Library('jenkins-shared-library')
+
 def gv
 
 pipeline {
     agent any
+    tools {
+        maven 'maven-3.9'
+    }
     stages {
         stage("init") {
             steps {
@@ -14,15 +20,17 @@ pipeline {
             steps {
                 script {
                     echo "building jar"
-                    //gv.buildJar()
+                    buildJar()
                 }
             }
         }
-        stage("build image") {
+        stage("build and push image") {
             steps {
                 script {
-                    echo "building image"
-                    //gv.buildImage()
+                    echo "Build and Push image"
+                    buildImage 'isidroj/demo-app:jma-3.0'
+                    dockerLogin()
+                    dockerPush 'isidroj/demo-app:jma-3.0'
                 }
             }
         }
