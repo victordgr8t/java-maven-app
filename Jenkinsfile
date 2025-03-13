@@ -24,11 +24,13 @@ pipeline {
                 }
             }
         }
-        stage("build image") {
+        stage("build and push image") {
             steps {
                 script {
                     echo "building image"
                     buildImage 'isidroj/demo-app:jma-3.0'
+                    dockerLogin()
+                    dockerPush 'isidroj/demo-app:jma-3.0'
                 }
             }
         }
