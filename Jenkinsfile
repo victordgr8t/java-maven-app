@@ -27,7 +27,7 @@ pipeline {
         stage("build and push image") {
             steps {
                 script {
-                    echo "building image"
+                    echo "Build and Push image"
                     buildImage 'isidroj/demo-app:jma-3.0'
                     dockerLogin()
                     dockerPush 'isidroj/demo-app:jma-3.0'
