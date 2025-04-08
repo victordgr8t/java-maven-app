@@ -7,9 +7,9 @@ pipeline {
 
     agent any
 
-    tools {  // accessing build tools for your project. Gradle maven jdk nodejs supported by jenkins
+    // tools {  // accessing build tools for your project. Gradle maven jdk nodejs supported by jenkins
         // maven 'maven-3.9' // declaring this will make maven commands available in all stages
-    }
+    // }
 
     parameters {
         string(name: 'VERSION', defaultValue: '', description: 'version to deploy on prof')
@@ -26,9 +26,9 @@ pipeline {
 
         stage("build") {
             when {
-                expression {
+               //  expression {
                     //BRANCH_NAME = 'dev' && CODE_CHANGES == true
-                }
+                //}
             }
             steps{
                 echo 'building the application...'
