@@ -1,6 +1,6 @@
 // read more about jenkins environment variables http://164.92.94.252:8080/env-vars.html/
 
-CODE_CHANGES = getGitChanges()
+//CODE_CHANGES = getGitChanges()
 
 
 pipeline {
@@ -8,7 +8,7 @@ pipeline {
     agent any
 
     tools {  // accessing build tools for your project. Gradle maven jdk nodejs supported by jenkins
-        maven 'maven-3.9' // declaring this will make maven commands available in all stages
+        // maven 'maven-3.9' // declaring this will make maven commands available in all stages
     }
 
     parameters {
@@ -27,7 +27,7 @@ pipeline {
         stage("build") {
             when {
                 expression {
-                    BRANCH_NAME = 'dev' && CODE_CHANGES == true
+                    //BRANCH_NAME = 'dev' && CODE_CHANGES == true
                 }
             }
             steps{
@@ -41,7 +41,7 @@ pipeline {
             when {
                 expression {
                     params.executeTests == true
-                    BRANCH_NAME == 'dev' || BRANCH_NAME == 'master' // this stage will execute when the branch is dev or master
+                    //BRANCH_NAME == 'dev' || BRANCH_NAME == 'master' // this stage will execute when the branch is dev or master
                 }
             }
             steps{
@@ -67,5 +67,5 @@ pipeline {
                 }
             }
         }
-    }
+    }    
 }
