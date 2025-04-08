@@ -25,7 +25,7 @@ pipeline {
     stages {
 
         stage("build") {
-            when {
+           // when {
                //  expression {
                     //BRANCH_NAME = 'dev' && CODE_CHANGES == true
                 //}
