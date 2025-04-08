@@ -1,17 +1,11 @@
-// read more about jenkins environment variables http://164.92.94.252:8080/env-vars.html/
-
-//CODE_CHANGES = getGitChanges()
 
 pipeline {
 
     agent any
 
-    // tools {  // accessing build tools for your project. Gradle maven jdk nodejs supported by jenkins
-        // maven 'maven-3.9' // declaring this will make maven commands available in all stages
-    // }
 
     parameters {
-        string(name: 'VERSION', defaultValue: '', description: 'version to deploy on prof')
+        
         choice(name:'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '' )
         booleanParam(name: 'executeTests', defaultValue: true, description: '')
     }
@@ -28,7 +22,6 @@ pipeline {
                //  expression {
                     //BRANCH_NAME = 'dev' && CODE_CHANGES == true
                 //}
-            }
             steps{
                 echo 'building the application...'
                 echo "building version ${params.VERSION}"
