@@ -1,42 +1,37 @@
-def gv
-
 pipeline {
 
     agent any
-    tools {
-        maven 'maven-3.9'
-    }
 
     stages {
-        stage ("init") {
+        stage ('test') {
             steps {
                 script {
-                    gv = load "script.groovy"
+                    echo 'testing the application...'
+                    echo "executing pipeline for $BRANCH_NAME"
                 }
             }
         }
-
-        stage('build jar') {
+        stage ('build') {
+            when {
+                expression {
+                    BRANCH_NAME = 'test-jenkins-jobs'
+                }
+            }
             steps {
                 script {
-                    gv.buildJar()
+                    echo 'building the application...'
                 }
             }
         }
-
-        stage('build image') {
-            steps {
-                script {
-                    gv.buildImage()
+        stage ('deploy') {
+            when {
+                expression {
+                    BRANCH_NAME == 'test-jenkins-jobs'
                 }
             }
-        }
-
-        stage('deploy') {
             steps {
                 script {
-                    gv.deployApp()
-
+                    echo 'deploying the application...'
                 }
             }
         }
