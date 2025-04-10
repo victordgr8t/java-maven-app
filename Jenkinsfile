@@ -1,39 +1,37 @@
-pipeline {
+def gv
 
+pipeline {
     agent any
 
-    stages {
-        stage ('test') {
-            steps {
-                script {
-                    echo 'testing the application...'
-                    echo "executing pipeline for $BRANCH_NAME"
-                }
-            }
-        }
-        stage ('build') {
-            when {
-                expression {
-                    BRANCH_NAME == 'main'
-                }
-            }
-            steps {
-                script {
-                    echo 'building the application...'
-                }
-            }
-        }
-        stage ('deploy') {
-            when {
-                expression {
-                    BRANCH_NAME == 'main'
-                }
-            }
-            steps {
-                script {
-                    echo 'deploying the application...'
-                }
-            }
-        }
     }
+    stages {
+        stage("init") {
+            steps {
+                script {
+                   gv = load "script.groovy" 
+                }
+            }
+        }
+        stage("build jar") {
+            steps {
+                script {
+                    buildJar()
+                }
+            }
+        }
+        stage("build image") {
+            steps {
+                script {
+                    buildImage 'vicdg8t/my-repo:jma-3.0'
+                }
+            }
+        }
+        stage("deploy") {
+            steps {
+                script {
+                    gv.deployApp()
+                }
+            }
+        }
+    }   
 }
