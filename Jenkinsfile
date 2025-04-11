@@ -24,10 +24,12 @@ pipeline {
                 }
             }
         }
-        stage("build image") {
+        stage("build and push image") {
             steps {
                 script {
-                    buildImage 'vicdg8t/my-repo:jma-4.0'
+                    buildImage 'vicdg8t/my-repo:jma-3.1'
+                    dockerLogin()
+                    dockerPush 'vicdg8t/my-repo:jma-3.1'
                 }
             }
         }
