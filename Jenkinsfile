@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-// testing  webhook
+// testing  webhook on pipeline
 // @Library('jenkins-shared-library') reference to shared library created on jenkins system config
 // @Library('jenkins-shared-library@2.0') in-case you want to have different versions in each project
 library identifier: 'jenkins-shared-library@main', retriever: modernSCM(
