@@ -51,7 +51,6 @@ pipeline {
                     buildImage "vicdg8t/my-repo:${IMAGE_VERSION}"
                     dockerLogin()
                     dockerPush "vicdg8t/my-repo:${IMAGE_VERSION}"
-                    commitUpdate()
                 }
             }
         }
