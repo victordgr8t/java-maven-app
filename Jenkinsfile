@@ -51,6 +51,7 @@ pipeline {
                     buildImage "vicdg8t/my-repo:${IMAGE_VERSION}"
                     dockerLogin()
                     dockerPush "vicdg8t/my-repo:${IMAGE_VERSION}"
+                    commitUpdate()
                 }
             }
         }
@@ -58,6 +59,14 @@ pipeline {
             steps {
                 script {
                     gv.deployApp()
+                }
+            }
+        }
+        stage('commit version update') {
+            steps {
+                script {
+                    commitUpdate()
+                    }
                 }
             }
         }
